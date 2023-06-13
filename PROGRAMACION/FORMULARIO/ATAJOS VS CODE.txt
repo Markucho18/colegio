@@ -1,0 +1,8 @@
+		ATAJOS VISUAL STUDIO CODE
+Ctrl + Shift + L (Cambiar todas las palabras que coinciden con la que seleccione)
+
+Shift + Alt + Up/Down (Duplicar codigo seleccionado hacia arriba/abajo)
+		ATAJOS SUBLIME TEXT
+Ctrl+Shift+A	Expand selection to tag, repeat shortcut to grab parent tag, etc, etc.
+Alt+Shift+W	Wrap with p tag, cursors start both tags for immediate replacement
+ctrl+shift+;	Removes current tag

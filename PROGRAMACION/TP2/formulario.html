@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="./main.js"></script>
+		<link rel="stylesheet" href="./style.css">
+		<title>FormularioMaterias</title>
+	</head>
+	<body>
+		<div class="header">
+			<img src="./assets/logo2.png">
+			<div class="links">
+				<a href="#">Google</a>
+				<a href="#">Wiki</a>
+				<a href="#">Youtube</a>
+			</div>
+			<h1>Formulario Materias</h1>
+		</div>
+		<div class="contenedor">
+			<div class="formulario" id="formularioDiv">
+				<form class="form" id="form">
+					<label> Materia: 
+					<input id="materia" type="text" placeholder="Materia">
+					</label>
+					<label> Docente: 
+						<input id="docente" type="text" placeholder="Docente">
+					</label>
+					<label> Curso:
+						<input id="curso"type="text" placeholder="Curso">
+					</label>
+					<label> Horario: 
+						<input id="horario" type="text" placeholder="Horario">
+					</label>
+					<div id="divNotas">
+						<label> Notas: 
+							<input id="nota" class="nota" type="text" placeholder="Nota">
+						</label>
+					</div>
+				</form>
+				<div class="botones">
+					<span class="boton" onclick="guardarDatos()">Guardar</span>
+					<span class="boton" onclick="eliminar()">Eliminar</span>
+					<span class="boton" onclick="mostrarOcultar()">Base de Datos</span>
+					<span class="boton" onclick="agregarNota()">+ Nota</span>
+				</div>
+			</div>
+
+			<div class="displayNone" id="tablaDiv">
+                <label class="buscador">
+                    <img src="./assets/lupa.png" alt="Lupa">
+                    <input type="text" placeholder="Buscar">
+                    <img src="./assets/atras.png" alt="" onclick="mostrarOcultar()">
+                    <img src="./assets/editar.png" alt="">
+                    <img src="./assets/borrar.png" alt="">
+                </label>  
+                <table id="tabla">
+                    <thead>
+                        <th>ID</th>
+                        <th>Materia</th>
+                        <th>Docente</th>
+                        <th>Curso</th>
+                        <th>Horario</th>
+                        <th>Notas</th>
+                        <th>Promedio</th>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+		</div>
+		<div class="footer">
+			<a href="#">
+				<img src="./assets/facebook.png" alt="Link a facebook">
+			</a>
+			<a href="#">
+				<img src="./assets/instagram.png" alt="Link a instagram">
+			</a>
+			<a href="#">
+				<img src="./assets/twitter.png" alt="Link a twitter">
+			</a>
+			<a href="#">
+				<img src="./assets/youtube.png" alt="Link a Youtube">
+			</a>
+		</div>
+	</body>
+</html>

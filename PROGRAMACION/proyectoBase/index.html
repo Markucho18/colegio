@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" href="./main.css">
+		<title>Formulario</title>
+	</head>
+	<body>
+		<div class="Header">
+			<img
+				src="./assets/logo.png"
+			>
+			<div class="Links">
+				<a href="www.google.com">Google</a>
+				<a href="www.wikipedia.com">Wiki</a>
+				<a href="www.youtube.com">Youtube</a>
+			</div>
+		</div>
+		<div class="Contenedor">
+			<div class="Formulario">
+				<!-- documento, nombres, apellidos, fecha_nac, localidad -->
+				<label> Documento: 
+					<input id="documento" type="text" placeholder="Documento">
+				</label>
+				<label> Apellidos: 
+					<input id="apellidos" type="text" placeholder="Apellidos">
+				</label>
+				<label> Nombres: 
+					<input id="nombres" type="text" placeholder="Nombres">
+				</label>
+				<label> Fecha Nac.: 
+					<input id="fecNac" type="text" placeholder="Fecha Nac.">
+				</label>
+				<label> Localidad: 
+					<select id="localidad">
+						<option>Ushuaia</option>
+						<option>Rio Grande</option>
+						<option>Tolhuin</option>
+					</select>
+				</label>
+				<span class="Boton">Guardar</span>
+			</div>
+			<div id="personas">
+			</div>
+		</div>
+		<div class="Footer">
+			<a href="#">
+				<img src="./assets/facebook.png" alt="Link a facebook">
+			</a>
+			<a href="#">
+				<img src="./assets/instagram.png" alt="Link a instagram">
+			</a>
+			<a href="#">
+				<img src="./assets/twitter.png" alt="Link a twitter">
+			</a>
+			<a href="#">
+				<img src="./assets/youtube.png" alt="Link a Youtube">
+			</a>
+		</div>
+	</body>
+</html>
