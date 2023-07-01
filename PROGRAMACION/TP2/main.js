@@ -61,18 +61,27 @@ function crearTabla(){
     let tabla = document.getElementById("tabla");
     materias.forEach((materia, indice) =>{
         let nuevaFila = document.createElement("tr");
-        for (let i = 0; i < 7; i++) {
+        let imagenBorrar = document.createElement("img")
+        imagenBorrar.src = "./assets/borrar.png"
+        imagenBorrar.classList.add("botonBorrarFila")
+        for (let i = 0; i < 8; i++) {
             let nuevaCelda = document.createElement("td");
             nuevaFila.appendChild(nuevaCelda);
         }
-        nuevaFila.firstChild.textContent = indice + 1;
+        nuevaFila.children[0].textContent = indice + 1;
         nuevaFila.children[1].textContent = materia.materia;
         nuevaFila.children[2].textContent = materia.docente;
         nuevaFila.children[3].textContent = materia.curso;
         nuevaFila.children[4].textContent = materia.horario;
         nuevaFila.children[5].textContent = materia.notas;
-        nuevaFila.lastChild.textContent = materia.promedio;
+        nuevaFila.children[6].textContent = materia.promedio;
+        nuevaFila.children[7].appendChild(imagenBorrar);
         tabla.appendChild(nuevaFila);
+
+        let botonesBorrarFila = document.querySelectorAll('.botonBorrarFila')
+        botonesBorrarFila.forEach(boton =>{
+            boton.addEventListener("click", borrarNota)
+        })
     })
 }
 
@@ -105,15 +114,35 @@ function mostrarOcultar(){
     }
 }
 
-/* Shorthands para comentar en Visual Studio Code:
-Comentar una línea de código:
+function borrarNota(evento){
+    let botonBorrarFila = evento.target;
+    let celda = botonBorrarFila.parentNode;
+    let row = celda.parentNode;
 
-En Windows/Linux: Selecciona la línea y presiona Ctrl + /.
+    let tabla = document.getElementById("tabla");
+    let filas = tabla.getElementsByTagName("tr");
+    let filasArray = [];
+    for ( i = 1; i < filas.length; i++){
+        filasArray.push(filas[i]);
+    }
+    console.log(filasArray)
+    
+    let indexOfRow = filasArray.indexOf(row);
+    console.log(indexOfRow);
 
-Comentar múltiples líneas de código:
+    tabla.removeChild(row);
 
-En Windows/Linux: Selecciona las líneas y presiona Shift + Alt + A.
-*/
+    materias.splice(indexOfRow, 1);
+    console.log(materias);
+    borrarTabla();
+    crearTabla();
+}
+
+function borrarTodasLasNotas(){
+    materias = [];
+    borrarTabla();
+}
+
 
 
 

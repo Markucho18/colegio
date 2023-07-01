@@ -165,17 +165,16 @@ img{
     padding: 5px;
     text-align: center;
     font-family: 'Open Sans', sans-serif;
+    user-select: none;
 }
 .tablaDiv td:hover{
-    background: rgb(233, 233, 233);
     cursor: pointer;
 }
-.seleccionada{
-    background-color: yellow;
-}
+
 .tablaDiv th{
     padding: 10px;
     font-family: 'Open Sans', sans-serif;
+    user-select: none;
 
 }
 .tablaDiv img{
@@ -186,16 +185,23 @@ img{
     cursor: pointer;
 }
 
-/*displayNone*/
+.botonBorrarFila{
+    margin: 0px;
+}
+
 .displayNone{
     display: none;
 }
 
+.tablaDiv #tabla tr:hover td{
+    background-color: rgb(255, 255, 200)
+}
 
 /*FOOTER*/
 .footer{
     background-color: rgb(107, 165, 165);
 }
+
 .footer img{
     height: 80px;
     width: 80px;
