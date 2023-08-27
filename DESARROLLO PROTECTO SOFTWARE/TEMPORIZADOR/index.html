@@ -9,18 +9,22 @@
 </head>
 <body>
     <div class="container">
-        <h1>TIMER</h1>
+        <h1>TEMPORIZADOR</h1>
         <div class="timer">
+            <span id="hours">00</span>:
             <span id="minutes">00</span>:
             <span id="seconds">00</span>
         </div>
-        <div class="inputsContainer">
-            <input type="number" id="minutesInput">
-            <input type="number" id="secondsInput">
-        </div>
-        <div class="start">
-            <span id="startButton">START</span>
-        </div>
+        <form>
+            <div class="inputsContainer" id="inputsContainer">
+                <input type="text" id="hoursInput">:
+                <input type="text" id="minutesInput">:
+                <input type="text" id="secondsInput">
+            </div>
+            <div class="start">
+                <input type="submit" value="INICIAR" id="startButton">
+            </div>
+        </form>
     </div>
     <script src="main.js"></script>
 </body>

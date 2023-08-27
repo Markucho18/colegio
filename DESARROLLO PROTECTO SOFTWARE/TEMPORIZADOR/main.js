@@ -1,72 +1,92 @@
+let hours = document.getElementById("hours");
 let minutes = document.getElementById("minutes");
 let seconds = document.getElementById("seconds");
+let inputsContainer = document.getElementById("inputsContainer");
+let hoursInput = document.getElementById("hoursInput");
 let minutesInput = document.getElementById("minutesInput");
 let secondsInput = document.getElementById("secondsInput");
 let startButton = document.getElementById("startButton");
 
 let power = false;
-const changeAction = ()=>{
-    if(power == false) startTimer();
+
+const changeAction = () => {
+    if (!power) startTimer();
     else stopTimer();
     power = !power;
 }
 
-change = true;
-minutesInput.addEventListener("input", ()=> change = !change)
-secondsInput.addEventListener("input", ()=> change = !change)
-
-
-const insertInputValue = ()=>{
-    minutesCount = minutesInput.value;
-    secondsCount = secondsInput.value;
-}
-
 let timerInterval;
+let hoursCount = 0;
 let minutesCount = 0;
 let secondsCount = 0;
-const startTimer = ()=>{
-    if(change == true) insertInputValue();
-    if(validateData(minutes.textContent, seconds.textContent) == "error") alert("Debes ingresar un numero valido")
-    else{
-        minutesCount = concatZero(minutesCount);
-        timerInterval = setInterval(()=>{
-            if(secondsCount == 00){
-                minutesCount--;
-                minutesCount = concatZero(minutesCount);
-                secondsCount = 59;
+let totalSeconds = 0;
+
+const startTimer = () => {
+    const validationMessage = validateData(hoursCount, minutesCount, secondsCount);
+    if (validationMessage === "valido") {
+        inputsContainer.style.display = "none"
+        timeToSeconds();
+        hoursCount = concatZero(getHours());
+        minutesCount = concatZero(getMinutes());
+        secondsCount = concatZero(totalSeconds % 60);
+        timerInterval = setInterval(() => {
+            hoursCount = concatZero(getHours());
+            minutesCount = concatZero(getMinutes());
+            secondsCount = concatZero(totalSeconds % 60);
+            if (totalSeconds > 0) {
+                totalSeconds--;
+                showTimer();
+            } else {
+                stopTimer();
             }
-            else{
-                secondsCount--;
-                secondsCount = concatZero(secondsCount);
-            }
-            showTimer();
-            if(minutesCount == 00 && secondsCount == 00) stopTimer();
-        },1000);
+        }, 1000);
+    } else {
+        console.log(validationMessage);
     }
 }
 
-const stopTimer = ()=>{
+const stopTimer = () => {
     clearInterval(timerInterval);
     showTimer();
+    inputsContainer.style.display = "flex";
 }
 
+const validateData = (hour, min, sec) => {
+    if (hour >= 100) return "Las horas no pueden ser mayor a 100";
+    else if (min >= 60) return "Los minutos no pueden ser mayor a 60";
+    else if (sec >= 60) return "Los segundos no pueden ser mayor a 60";
+    else if (hour < 0 || min < 0 || sec < 0) return "Ningun valor puede ser negativo";
+    else return "valido";
+}
 
-const validateData = (min, sec) => {
-    if (min < 0 || sec < 0 || min >= 60 || sec >= 60) {
-        return "error";
+const concatZero = (num) => {
+    if (num < 10) {
+        return parseInt(`0${num}`);
     }
+    return num;
 }
 
-const concatZero = (num)=>{
-    if(num < 10){
-        num = `0${num}`;
-        return parseInt(num);
-    }
-}
-
-const showTimer = ()=>{
-    seconds.textContent = secondsCount;
+const showTimer = () => {
+    hours.textContent = hoursCount;
     minutes.textContent = minutesCount;
+    seconds.textContent = secondsCount;
 }
 
-startButton.addEventListener("click", changeAction);
+const timeToSeconds = () => {
+    totalSeconds = parseInt(secondsCount);
+    totalSeconds += parseInt(minutesCount) * 60;
+    totalSeconds += parseInt(hoursCount) * 3600;
+}
+
+const getHours = () => {
+    return Math.floor(totalSeconds / 3600);
+}
+
+const getMinutes = () => {
+    return Math.floor((totalSeconds % 3600) / 60);
+}
+
+startButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    changeAction();
+});
