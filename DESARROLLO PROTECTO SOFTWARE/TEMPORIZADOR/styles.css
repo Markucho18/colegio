@@ -1,0 +1,92 @@
+body{
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: tan;
+}
+
+body, .container{
+    display: flex;
+    flex-direction: column;
+}
+
+.container > div{
+    display: flex;
+    flex-direction: row;
+}
+
+.container{
+    justify-content: center;
+    align-items: center;
+    margin-top: 200px;
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid black;
+    box-shadow: 0px 0px 5px 1px black;
+    background-color: red;
+    gap: 15px;
+}
+
+.container h1{
+    color: gold;
+    margin: 0px;
+
+}
+
+.container .timer{
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    overflow: hidden;
+    padding: 10px;
+    margin: 0px;
+}
+
+.container .timer{
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+}
+
+.container .inputsContainer{
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    box-sizing: border-box;
+    max-width: fit-content;
+    width: fit-content;
+}
+
+.container .inputsContainer input{
+    width: 100px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 5px;
+    font-size: 24px;
+}
+
+.container .start #startButton{
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: cornflowerblue;
+    padding: 5px;
+    font-size: 24px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: rgb(230, 230, 230);
+    cursor: pointer;
+    transition: background .3s ease-in-out;
+}
+
+.startButton{
+    background-color: cornflowerblue;
+}
+.cancelButton{
+    background-color: red;
+}
+
+.container .start #startButton:hover{
+    color: white;
+    background-color: rgb(72, 128, 231);
+}
