@@ -5,10 +5,9 @@ function eliminar(){
     document.getElementById("docente").value = "";
     document.getElementById("curso").value = "";
     document.getElementById("horario").value = "";
-    let notasForm = document.getElementsByClassName("nota");
+    let notasForm = document.querySelectorAll(".nota");
     for( i = notasForm.length - 1; i > 0; i--){
-        let nota = notasForm[i];
-        nota.remove();
+        notasForm[i].remove();
     }
     notasForm[0].value = "";
 }
@@ -34,10 +33,9 @@ function guardarDatos(){
         notas: [],
         promedio: ""
     }
-    let notasForm = document.getElementsByClassName("nota");
+    let notasForm = document.querySelectorAll(".nota");
     for( i = 0; i < notasForm.length; i++){
-        let nota = notasForm[i].value;
-        datosForm.notas.push(nota)
+        datosForm.notas.push(notasForm[i].value)
     }
     materias.push(datosForm);
     calcPromedio();

@@ -1,14 +1,11 @@
-let materias = []
-
 function eliminar(){
     document.getElementById("materia").value = "";
     document.getElementById("docente").value = "";
     document.getElementById("curso").value = "";
     document.getElementById("horario").value = "";
-    let notasForm = document.getElementsByClassName("nota");
+    let notasForm = document.querySelectorAll(".nota");
     for( i = notasForm.length - 1; i > 0; i--){
-        let nota = notasForm[i];
-        nota.remove();
+        notasForm[i].remove();
     }
     notasForm[0].value = "";
 }
@@ -25,7 +22,7 @@ function agregarNota(){
     }
 }
 
-url = "http://localhost/TP4/datos.json"
+const url = "http://localhost/TP4/datos.json"
 
 function guardarDatos(){
     let datosForm = {
@@ -39,31 +36,30 @@ function guardarDatos(){
     let notasForm = document.getElementsByClassName("nota");
     for( i = 0; i < notasForm.length; i++){
         let nota = notasForm[i].value;
-        datosForm.notas.push(nota)
+        datosForm.notas.push(nota);
     }
-    datosForm.promedio = calcPromedio(datosForm.notas);
-    materias.push(datosForm);
-    console.log(materias)
-    axios.post(url, materias)
-    .then((res)=>{
-        console.log("todo piola");
-        console.log(res);
-    }).catch((error)=>{
-        console.log("no salio todo piola");o
-        console.log(error);
-    })
-    axios.get(url)
-    .then((res)=>{
-        console.log(res)
-    })
+    enviarInfo(datosForm);
 }
 
-function calcPromedio(notass){
-    for(let i = 0; i < notass.length; i++){
-        let suma = notass.reduce((acumulador, nota)=>{
+const enviarInfo = async (datosForm)=>{
+    try{
+        const res = await axios.get(url);
+        const jsonData = res.data;
+        jsonData.push(datosForm);
+        console.log(jsonData)
+        await axios.post(url, jsonData);
+        eliminar();
+    } catch(error){
+        console.log("Ha ocurrido un error:", error);
+    }
+}
+
+function calcPromedio(notas){
+    for(let i = 0; i < notas.length; i++){
+        let suma = notas.reduce((acumulador, nota)=>{
             return acumulador + parseInt(nota);
         }, 0);
-        let promedio = Math.round(suma / notass.length);
+        let promedio = Math.round(suma / notas.length);
         return promedio
     }
 }
@@ -72,9 +68,14 @@ function crearTabla(){
     let tabla = document.getElementById("tabla");
     axios.get(url)
     .then((res)=>{
+        console.log("Salio bien pa")
         console.log(res);
     })
-    materias.forEach((materia, indice) =>{
+    .catch((error)=>{
+        console.log("Algo salio mal xd");
+        console.log(error);
+    })
+    /* materias.forEach((materia, indice) =>{
         let nuevaFila = document.createElement("tr");
         let imagenBorrar = document.createElement("img")
         imagenBorrar.src = "./assets/borrar.png"
@@ -97,7 +98,15 @@ function crearTabla(){
         botonesBorrarFila.forEach(boton =>{
             boton.addEventListener("click", borrarNota)
         })
-    })
+    }) */
+}
+
+function borrarTabla(){
+    let tabla = document.getElementById("tabla");
+    let filas = tabla.getElementsByTagName('tr');
+    for( let i = filas.length - 1; i > 0; i--){
+        tabla.removeChild(filas[i]);
+    }
 }
 
 function mostrarOcultar(){
