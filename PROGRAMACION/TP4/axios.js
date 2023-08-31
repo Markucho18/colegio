@@ -38,20 +38,29 @@ function guardarDatos(){
         let nota = notasForm[i].value;
         datosForm.notas.push(nota);
     }
+    datosForm.promedio = calcPromedio(datosForm.notas)
     enviarInfo(datosForm);
 }
 
 const enviarInfo = async (datosForm)=>{
     try{
-        const res = await axios.get(url);
-        const jsonData = res.data;
-        jsonData.push(datosForm);
-        console.log(jsonData)
-        await axios.post(url, jsonData);
+        let data = await obtenerInfo();
+        console.log(data);
+        data.push(datosForm);
+        console.log(data)
+        await axios.post(url, data);
         eliminar();
     } catch(error){
         console.log("Ha ocurrido un error:", error);
     }
+}
+
+const obtenerInfo = async ()=>{
+    const res = await axios.get(url);
+    console.log(res);
+    const jsonData = JSON.parse(JSON.stringify(res.data));
+    console.log(jsonData);
+    return jsonData
 }
 
 function calcPromedio(notas){
@@ -66,15 +75,7 @@ function calcPromedio(notas){
 
 function crearTabla(){
     let tabla = document.getElementById("tabla");
-    axios.get(url)
-    .then((res)=>{
-        console.log("Salio bien pa")
-        console.log(res);
-    })
-    .catch((error)=>{
-        console.log("Algo salio mal xd");
-        console.log(error);
-    })
+    let data = obtenerInfo();
     /* materias.forEach((materia, indice) =>{
         let nuevaFila = document.createElement("tr");
         let imagenBorrar = document.createElement("img")
