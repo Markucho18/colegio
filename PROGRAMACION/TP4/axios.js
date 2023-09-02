@@ -24,7 +24,7 @@ function agregarNota(){
 
 const url = "http://localhost/TP4/datos.json"
 
-function guardarDatos(){
+async function guardarDatos(){
     let datosForm = {
         materia: document.getElementById("materia").value,
         docente: document.getElementById("docente").value,
@@ -39,28 +39,17 @@ function guardarDatos(){
         datosForm.notas.push(nota);
     }
     datosForm.promedio = calcPromedio(datosForm.notas)
-    enviarInfo(datosForm);
-}
-
-const enviarInfo = async (datosForm)=>{
-    try{
-        let data = await obtenerInfo();
-        console.log(data);
-        data.push(datosForm);
-        console.log(data)
-        await axios.post(url, data);
-        eliminar();
-    } catch(error){
-        console.log("Ha ocurrido un error:", error);
-    }
-}
-
-const obtenerInfo = async ()=>{
-    const res = await axios.get(url);
-    console.log(res);
-    const jsonData = JSON.parse(JSON.stringify(res.data));
-    console.log(jsonData);
-    return jsonData
+    let response = await axios.get(url);
+    let data = response.data;
+    data.forEach(elemento => console.log(elemento))
+    data.push(datosForm);
+    console.log(data);
+    await axios.post(url, data)
+        .then((res) =>{
+            console.log(res);
+            eliminar();
+        })
+        .catch((error)=> console.log("Ha ocurrido un error", error))
 }
 
 function calcPromedio(notas){
